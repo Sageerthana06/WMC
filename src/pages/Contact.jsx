@@ -17,6 +17,10 @@ import GlassCard from "../components/ui/GlassCard";
 import LoadingSpinner from "../components/ui/LoadingSpinner";
 import ImageUpload from "../components/ui/ImageUpload";
 import LocationSection from "../components/contact/LocationSection";
+import {
+  FadeInUp,
+  FloatingElement,
+} from "../components/animations/AnimatedComponents";
 import { useData } from "../context/DataContext";
 import { COMPANY } from "../data/initialData";
 
@@ -37,7 +41,9 @@ export default function Contact() {
   useEffect(() => {
     if (hash === "#location") {
       setTimeout(() => {
-        document.getElementById("location")?.scrollIntoView({ behavior: "smooth" });
+        document
+          .getElementById("location")
+          ?.scrollIntoView({ behavior: "smooth" });
       }, 300);
     }
   }, [hash]);
@@ -59,7 +65,14 @@ export default function Contact() {
     await new Promise((r) => setTimeout(r, 1200));
     addMessage(form);
     toast.success("Message sent successfully! We will contact you soon.");
-    setForm({ name: "", email: "", phone: "", subject: "", message: "", image: "" });
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
+      image: "",
+    });
     setLoading(false);
   };
 
@@ -78,7 +91,12 @@ export default function Contact() {
 
   return (
     <>
-      <div className="pt-24 pb-12">
+      <motion.div
+        className="pt-24 pb-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <SectionTitle
             label="Contact"
@@ -87,9 +105,29 @@ export default function Contact() {
           />
 
           <div className="grid gap-12 lg:grid-cols-2">
-            <GlassCard>
-              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-                <div>
+            <FadeInUp>
+              <motion.form
+                onSubmit={handleSubmit}
+                className="space-y-5"
+                noValidate
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.1,
+                    },
+                  },
+                }}
+              >
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                >
                   <input
                     name="name"
                     placeholder="Your Name *"
@@ -100,8 +138,14 @@ export default function Contact() {
                   {errors.name && (
                     <p className="mt-1 text-sm text-red-400">{errors.name}</p>
                   )}
-                </div>
-                <div>
+                </motion.div>
+
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                >
                   <input
                     name="email"
                     type="email"
@@ -113,119 +157,221 @@ export default function Contact() {
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-400">{errors.email}</p>
                   )}
-                </div>
-                <input
+                </motion.div>
+
+                <motion.input
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
                   name="phone"
                   placeholder="Phone Number"
                   value={form.phone}
                   onChange={handleChange}
                   className={inputClass("phone")}
                 />
-                <input
+
+                <motion.input
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
                   name="subject"
                   placeholder="Subject"
                   value={form.subject}
                   onChange={handleChange}
                   className={inputClass("subject")}
                 />
-              <div>
-                <textarea
-                  name="message"
-                  rows={5}
-                  placeholder="Your Message *"
-                  value={form.message}
-                  onChange={handleChange}
-                  className={`${inputClass("message")} resize-none`}
-                />
-                {errors.message && (
-                  <p className="mt-1 text-sm text-red-400">{errors.message}</p>
-                )}
-              </div>
-              <ImageUpload
-                value={form.image}
-                onChange={(url) => setForm((prev) => ({ ...prev, image: url }))}
-                label="Attach photo (optional)"
-                hint="Tap to choose a photo — no link needed"
-              />
-              <button
+
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                >
+                  <textarea
+                    name="message"
+                    rows={5}
+                    placeholder="Your Message *"
+                    value={form.message}
+                    onChange={handleChange}
+                    className={`${inputClass("message")} resize-none`}
+                  />
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-400">
+                      {errors.message}
+                    </p>
+                  )}
+                </motion.div>
+
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                >
+                  <ImageUpload
+                    value={form.image}
+                    onChange={(url) =>
+                      setForm((prev) => ({ ...prev, image: url }))
+                    }
+                    label="Attach photo (optional)"
+                    hint="Tap to choose a photo — no link needed"
+                  />
+                </motion.div>
+
+                <motion.button
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
                   type="submit"
                   disabled={loading}
+                  whileHover={{ scale: loading ? 1 : 1.05 }}
+                  whileTap={{ scale: loading ? 1 : 0.95 }}
                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-4 font-semibold text-white disabled:opacity-60"
                 >
                   {loading ? <LoadingSpinner size="sm" /> : "Send Message"}
-                </button>
-              </form>
-            </GlassCard>
+                </motion.button>
+              </motion.form>
+            </FadeInUp>
 
             <div className="space-y-6">
-              <GlassCard>
-                <h3 className="font-display text-xl font-semibold text-white">
-                  Company Details
-                </h3>
-                <ul className="mt-6 space-y-4 text-slate-400">
-                  <li className="flex items-start gap-3">
-                    <FaMapMarkerAlt className="mt-1 shrink-0 text-cyan-400" />
-                    {COMPANY.address}
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <FaPhone className="shrink-0 text-cyan-400" />
-                    <a href={`tel:${COMPANY.phone}`} className="hover:text-white">
-                      {COMPANY.phone}
-                    </a>
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <FaEnvelope className="shrink-0 text-cyan-400" />
-                    <a href={`mailto:${COMPANY.email}`} className="hover:text-white">
-                      {COMPANY.email}
-                    </a>
-                  </li>
-                </ul>
-                <a
-                  href={`https://wa.me/${COMPANY.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 inline-flex items-center gap-2 rounded-xl bg-green-500 px-6 py-3 font-semibold text-white hover:bg-green-600"
+              <FadeInUp delay={0.1}>
+                <motion.div
+                  whileHover={{
+                    y: -4,
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                  }}
                 >
-                  <FaWhatsapp className="text-xl" /> Chat on WhatsApp
-                </a>
-              </GlassCard>
+                  <GlassCard>
+                    <h3 className="font-display text-xl font-semibold text-white">
+                      Company Details
+                    </h3>
+                    <ul className="mt-6 space-y-4 text-slate-400">
+                      <motion.li
+                        className="flex items-start gap-3"
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <FloatingElement duration={3} distance={5}>
+                          <FaMapMarkerAlt className="mt-1 shrink-0 text-cyan-400" />
+                        </FloatingElement>
+                        {COMPANY.address}
+                      </motion.li>
 
-              <GlassCard>
-                <h3 className="mb-4 font-semibold text-white">Follow Us</h3>
-                <div className="flex gap-3">
-                  {[
-                    { icon: FaFacebookF, href: COMPANY.social.facebook },
-                    { icon: FaLinkedinIn, href: COMPANY.social.linkedin },
-                    { icon: FaInstagram, href: COMPANY.social.instagram },
-                    { icon: FaTwitter, href: COMPANY.social.twitter },
-                  ].map(({ icon: Icon, href }, i) => (
-                    <a
-                      key={i}
-                      href={href}
+                      <motion.li
+                        className="flex items-center gap-3"
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <FloatingElement duration={3} distance={5}>
+                          <FaPhone className="shrink-0 text-cyan-400" />
+                        </FloatingElement>
+                        <a
+                          href={`tel:${COMPANY.phone}`}
+                          className="hover:text-white"
+                        >
+                          {COMPANY.phone}
+                        </a>
+                      </motion.li>
+
+                      <motion.li
+                        className="flex items-center gap-3"
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring", stiffness: 400 }}
+                      >
+                        <FloatingElement duration={3} distance={5}>
+                          <FaEnvelope className="shrink-0 text-cyan-400" />
+                        </FloatingElement>
+                        <a
+                          href={`mailto:${COMPANY.email}`}
+                          className="hover:text-white"
+                        >
+                          {COMPANY.email}
+                        </a>
+                      </motion.li>
+                    </ul>
+
+                    <motion.a
+                      href={`https://wa.me/${COMPANY.whatsapp}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="glass flex h-11 w-11 items-center justify-center rounded-lg text-slate-400 hover:text-cyan-400"
+                      className="mt-6 inline-flex items-center gap-2 rounded-xl bg-green-500 px-6 py-3 font-semibold text-white hover:bg-green-600"
+                      whileHover={{
+                        scale: 1.05,
+                        boxShadow: "0 0 20px rgba(34, 197, 94, 0.5)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <Icon />
-                    </a>
-                  ))}
-                </div>
-              </GlassCard>
+                      <FloatingElement duration={2} distance={3}>
+                        <FaWhatsapp className="text-xl" />
+                      </FloatingElement>
+                      Chat on WhatsApp
+                    </motion.a>
+                  </GlassCard>
+                </motion.div>
+              </FadeInUp>
 
-              <motion.a
-                href="#location"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex items-center justify-center gap-2 rounded-2xl border border-sky-400/40 bg-sky-500/10 px-6 py-4 text-sm font-semibold text-sky-300 transition hover:bg-sky-500/20"
-              >
-                <FaMapMarkerAlt />
-                Scroll to full location map below
-              </motion.a>
+              <FadeInUp delay={0.2}>
+                <motion.div whileHover={{ y: -4, scale: 1.01 }}>
+                  <GlassCard>
+                    <h3 className="mb-4 font-semibold text-white">Follow Us</h3>
+                    <div className="flex gap-3">
+                      {[
+                        { icon: FaFacebookF, href: COMPANY.social.facebook },
+                        { icon: FaLinkedinIn, href: COMPANY.social.linkedin },
+                        { icon: FaInstagram, href: COMPANY.social.instagram },
+                        { icon: FaTwitter, href: COMPANY.social.twitter },
+                      ].map(({ icon: Icon, href }, i) => (
+                        <motion.a
+                          key={i}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="glass flex h-11 w-11 items-center justify-center rounded-lg text-slate-400 hover:text-cyan-400"
+                          initial={{ opacity: 0, scale: 0 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.1 }}
+                          whileHover={{
+                            scale: 1.2,
+                            rotate: 10,
+                            backgroundColor: "rgba(6, 182, 212, 0.1)",
+                          }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          <Icon />
+                        </motion.a>
+                      ))}
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              </FadeInUp>
+
+              <FadeInUp delay={0.3}>
+                <motion.a
+                  href="#location"
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 30px rgba(56, 189, 248, 0.3)",
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center gap-2 rounded-2xl border border-sky-400/40 bg-sky-500/10 px-6 py-4 text-sm font-semibold text-sky-300 transition hover:bg-sky-500/20"
+                >
+                  <FloatingElement duration={2} distance={3}>
+                    <FaMapMarkerAlt />
+                  </FloatingElement>
+                  Scroll to full location map below
+                </motion.a>
+              </FadeInUp>
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <LocationSection />
     </>

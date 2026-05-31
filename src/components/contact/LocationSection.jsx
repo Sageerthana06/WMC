@@ -29,20 +29,8 @@ export default function LocationSection() {
     <>
       <section
         id="location"
-        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden bg-gradient-to-br from-sky-100 via-sky-200/90 to-cyan-100"
+        className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen overflow-hidden bg-gradient-to-b from-sky-200 to-sky-100"
       >
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-sky-300/40 blur-3xl"
-          />
-          <motion.div
-            animate={{ x: [0, -25, 0], y: [0, 25, 0] }}
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-cyan-300/35 blur-3xl"
-          />
-        </div>
 
         <div className="relative mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
           <motion.div

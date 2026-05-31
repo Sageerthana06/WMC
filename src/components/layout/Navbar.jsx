@@ -17,10 +17,33 @@ const linkClass = (isActive, compact = false) =>
       : "px-2.5 py-2 text-[13px] lg:px-3 lg:text-sm"
   } ${isActive ? "text-cyan-400" : "text-slate-300 hover:text-white"}`;
 
-export default function Navbar() {
-  // ... (keep all your existing logic here, from const [extrasOpen... to the end of goToMap)
+const NavItem = ({ to, label, end, compact }) => (
+  <li className="shrink-0">
+    <NavLink
+      to={to}
+      end={end}
+      className={({ isActive }) =>
+        `group block ${linkClass(isActive, compact)}`
+      }
+    >
+      {({ isActive }) => (
+        <>
+          {label}
+          <motion.span
+            initial={false}
+            animate={{
+              width: isActive ? "100%" : "0%",
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className={`absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-cyan-400 group-hover:w-2/3`}
+          />
+        </>
+      )}
+    </NavLink>
+  </li>
+);
 
-  // (Assuming your existing logic remains unchanged)
+export default function Navbar() {
   const [extrasOpen, setExtrasOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { darkMode, toggleTheme } = useTheme();
@@ -48,123 +71,183 @@ export default function Navbar() {
     }
   };
 
-  const NavItem = ({ to, label, end, compact }) => (
-    <li className="shrink-0">
-      <NavLink
-        to={to}
-        end={end}
-        className={({ isActive }) =>
-          `group block ${linkClass(isActive, compact)}`
-        }
-      >
-        {({ isActive }) => (
-          <>
-            {label}
-            <span
-              className={`absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-cyan-400 transition-all duration-300 ${
-                isActive ? "w-full" : "w-0 group-hover:w-2/3"
-              }`}
-            />
-          </>
-        )}
-      </NavLink>
-    </li>
-  );
-
+  // சரிசெய்யப்பட்ட இடம்: இங்குதான் return ( சேர்க்கப்பட்டுள்ளது
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass-dark shadow-lg" : "bg-slate-950/60 backdrop-blur-md"
-      }`}
+    <motion.header
+      animate={{
+        backgroundColor: scrolled
+          ? "rgba(15, 23, 42, 0.95)"
+          : "rgba(6, 15, 34, 0.6)",
+        boxShadow: scrolled
+          ? "0 10px 30px rgba(0, 0, 0, 0.4)"
+          : "0 0px 0px rgba(0, 0, 0, 0)",
+      }}
+      transition={{ duration: 0.3 }}
+      className="fixed inset-x-0 top-0 z-50 backdrop-blur-md"
     >
       <nav
         className="mx-auto flex h-14 max-w-7xl items-center gap-1.5 px-2 sm:gap-2 sm:px-4 md:h-16 lg:px-8"
         aria-label="Main navigation"
       >
-        <Link to="/" className="flex shrink-0 items-center gap-4">
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-10 w-10 md:h-12 md:w-12 object-contain"
-          />
-          <span className="hidden whitespace-nowrap font-display text-lg font-bold text-white md:block">
-            World Entrepreneurs Export & Import (PVT) LTD
-          </span>
-        </Link>
-        {/* ... (rest of your existing JSX remains the same) */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Link to="/" className="flex shrink-0 items-center gap-4">
+            <motion.img
+              src={logo}
+              alt="Logo"
+              className="h-10 w-10 md:h-12 md:w-12 object-contain"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            />
+            <span className="hidden whitespace-nowrap font-display text-lg font-bold text-white md:block">
+              World Entrepreneurs Export & Import (PVT) LTD
+            </span>
+          </Link>
+        </motion.div>
 
-        <div className="min-w-0 flex-1 overflow-x-auto scrollbar-hide">
+        <motion.div
+          className="min-w-0 flex-1 overflow-x-auto scrollbar-hide"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           <ul className="flex flex-row items-center justify-start gap-0 pr-1 md:justify-center">
-            {mainNavLinks.map((link) => (
-              <NavItem key={link.to} {...link} compact />
+            {mainNavLinks.map((link, index) => (
+              <motion.div
+                key={link.to}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 + index * 0.05 }}
+              >
+                <NavItem {...link} compact />
+              </motion.div>
             ))}
             <li className="shrink-0 md:hidden">
-              <button
+              <motion.button
                 type="button"
                 onClick={goToMap}
                 className={`${linkClass(false, true)} text-sky-300`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 Map
-              </button>
+              </motion.button>
             </li>
           </ul>
-        </div>
+        </motion.div>
 
-        <div className="hidden shrink-0 items-center gap-2 md:flex">
-          <button
+        <motion.div
+          className="hidden shrink-0 items-center gap-2 md:flex"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <motion.button
             type="button"
             onClick={goToMap}
             className="flex items-center gap-1 whitespace-nowrap px-2 py-2 text-sm font-medium text-sky-300 hover:text-sky-200"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <FaMapMarkerAlt className="h-3.5 w-3.5 text-sky-400" />
+            <motion.div
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <FaMapMarkerAlt className="h-3.5 w-3.5 text-sky-400" />
+            </motion.div>
             Map
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             type="button"
             onClick={toggleTheme}
             className="rounded-lg border border-white/10 bg-white/5 p-2 text-slate-300 hover:text-white"
             aria-label="Toggle theme"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {darkMode ? (
-              <FaSun className="h-5 w-5" />
-            ) : (
-              <FaMoon className="h-5 w-5" />
-            )}
-          </button>
-          <Link
-            to="/contact"
-            className="rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 hover:opacity-90"
+            <motion.div
+              initial={false}
+              animate={{ rotate: darkMode ? 180 : 0 }}
+              transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            >
+              {darkMode ? (
+                <FaSun className="h-5 w-5" />
+              ) : (
+                <FaMoon className="h-5 w-5" />
+              )}
+            </motion.div>
+          </motion.button>
+          <motion.div
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0 0 30px rgba(6, 182, 212, 0.5)",
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            Contact
-          </Link>
-        </div>
+            <Link
+              to="/contact"
+              className="block rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25"
+            >
+              Contact
+            </Link>
+          </motion.div>
+        </motion.div>
 
-        <button
+        <motion.button
           type="button"
           className="flex shrink-0 rounded-lg border border-white/10 bg-white/5 p-2 text-white md:hidden"
           onClick={() => setExtrasOpen(!extrasOpen)}
           aria-expanded={extrasOpen}
           aria-label="More options"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
         >
-          {extrasOpen ? (
-            <HiX className="h-5 w-5" />
-          ) : (
-            <HiMenuAlt3 className="h-5 w-5" />
-          )}
-        </button>
+          <motion.div
+            animate={{ rotate: extrasOpen ? 90 : 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          >
+            {extrasOpen ? (
+              <HiX className="h-5 w-5" />
+            ) : (
+              <HiMenuAlt3 className="h-5 w-5" />
+            )}
+          </motion.div>
+        </motion.button>
       </nav>
 
-      {/* ... (rest of AnimatePresence code) */}
       <AnimatePresence>
         {extrasOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="border-t border-white/10 bg-slate-950/95 backdrop-blur-xl md:hidden"
           >
-            <ul className="flex flex-col gap-0.5 px-3 py-3">
-              <li>
+            <motion.ul
+              className="flex flex-col gap-0.5 px-3 py-3"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.05,
+                  },
+                },
+              }}
+            >
+              <motion.li
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0 },
+                }}
+              >
                 <NavLink
                   to="/contact"
                   className={({ isActive }) =>
@@ -173,26 +256,40 @@ export default function Navbar() {
                 >
                   Contact
                 </NavLink>
-              </li>
-              <li className="flex gap-2">
-                <button
+              </motion.li>
+              <motion.li
+                className="flex gap-2"
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: { opacity: 1, x: 0 },
+                }}
+              >
+                <motion.button
                   type="button"
                   onClick={toggleTheme}
                   className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/10 py-2.5 text-sm text-slate-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {darkMode ? <FaSun /> : <FaMoon />} Theme
-                </button>
-                <Link
-                  to="/contact"
-                  className="flex flex-1 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-2.5 text-sm font-semibold text-white"
+                </motion.button>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex flex-1"
                 >
-                  Get Quote
-                </Link>
-              </li>
-            </ul>
+                  <Link
+                    to="/contact"
+                    className="flex flex-1 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-2.5 text-sm font-semibold text-white"
+                  >
+                    Get Quote
+                  </Link>
+                </motion.div>
+              </motion.li>
+            </motion.ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

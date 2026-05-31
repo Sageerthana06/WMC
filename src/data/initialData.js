@@ -95,7 +95,7 @@ export const initialGallery = [
     id: "g2",
     title: "Premium Quality Products",
     category: "products", // tabs-இல் உள்ள "products" உடன் பொருந்தும்
-    image: "/images/gal-2.jpg",
+    image: "/images/x.jpg",
     type: "image",
   },
   {

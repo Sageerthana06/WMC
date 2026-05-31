@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Viaoda+Libre&family=Imprima&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Imprima", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Viaoda Libre", serif;
   --color-brand-50: #ecfeff;
   --color-brand-100: #cffafe;
   --color-brand-200: #a5f3fc;
@@ -19,11 +20,27 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: auto;
+    scrollbar-gutter: stable;
   }
 
   body {
+    margin: 0;
+    padding: 0;
+    background: #0a0608;
     @apply font-sans antialiased;
+  }
+
+  @keyframes bobUp {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
   }
 }
 

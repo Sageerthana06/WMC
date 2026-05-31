@@ -44,7 +44,7 @@ export default function GalleryInsertForm({
             { id: "products", label: "Products" },
             { id: "warehouse", label: "Warehouse" },
             { id: "events", label: "Events" },
-            { id: "promotion", label: "Promotion" }, // 👈 இந்த புதிய லைன் இப்போது சேர்க்கப்பட்டுள்ளது!
+            { id: "promotion", label: "Promotion" }, // 👈 !
           ].map((c) => (
             <button
               key={c.id}

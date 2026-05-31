@@ -88,14 +88,14 @@ export const initialGallery = [
     id: "g1",
     title: "chairman",
     category: "promotion",
-    image: "/photo/chairman.jpg",
+    image: "/photo/chairman.png",
     type: "image",
   },
   {
     id: "g2",
-    title: "Premium Quality Products",
-    category: "products", // tabs-இல் உள்ள "products" உடன் பொருந்தும்
-    image: "/images/x.jpg",
+    title: "hr",
+    category: "promotion",
+    image: "/photo/hr.jpg",
     type: "image",
   },
   {
@@ -197,8 +197,7 @@ export const team = [
 ];
 
 export const stats = [
-  { label: "Countries Served", value: 45, suffix: "+" },
-  { label: "Shipments Delivered", value: 12000, suffix: "+" },
-  { label: "Happy Clients", value: 850, suffix: "+" },
-  { label: "Years Experience", value: 18, suffix: "" },
+  { label: "YEARS EXPERIENCE", value: 7, suffix: "+" },
+  { label: "CURRENT STAFF", value: 250, suffix: "+" },
+  { label: "RETENTION RATE", value: 99, suffix: "+" },
 ];

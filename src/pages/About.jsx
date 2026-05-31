@@ -85,11 +85,12 @@ export default function About() {
                 center={false}
               />
               <p className="text-slate-400 leading-relaxed">
-                Founded in 2008, World Entrepreneurs Export & Import (PVT) LTD
-                began as a small trading firm in Colombo. Today, we are a
-                full-service international trade company handling thousands of
-                shipments annually across agriculture, textiles, industrial
-                goods, and more.
+                World Entrepreneurs Company was founded to empower individuals
+                through entrepreneurship, leadership development, and direct
+                marketing opportunities. Since its establishment, the company
+                has focused on professional growth, innovation, and creating
+                pathways to success for its team members and partners.
+                "Empowering People, Building Leaders."
               </p>
               <p className="mt-4 text-slate-400 leading-relaxed">
                 Our growth has been driven by integrity, compliance, and a
@@ -142,9 +143,12 @@ export default function About() {
                   Mission
                 </h3>
                 <p className="mt-4 text-slate-400">
-                  To empower Sri Lankan businesses and international partners
-                  with seamless, compliant, and cost-effective export and import
-                  solutions that drive sustainable growth.
+                  Welcome to our company. Our mission is to create
+                  opportunities, develop leadership, and empower individuals to
+                  achieve their personal and professional goals. Through
+                  innovation, teamwork, and dedication, we strive to provide
+                  exceptional value to our customers and partners. Thank you for
+                  being part of our journey towards growth and success
                 </p>
               </GlassCard>
             </motion.div>
@@ -160,50 +164,13 @@ export default function About() {
                   Vision
                 </h3>
                 <p className="mt-4 text-slate-400">
-                  To be South Asia&apos;s most trusted trade facilitation
-                  company, recognized for innovation, reliability, and
-                  excellence in global commerce.
+                  To become a leading marketing company that empowers Sri Lankan
+                  youth, enabling them to establish branch companies across the
+                  nation and create sustainable employment opportunities.
                 </p>
               </GlassCard>
             </motion.div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Leadership Section */}
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <SectionTitle label="Leadership" title="Message from the CEO" />
-          <FadeInUp>
-            <motion.div
-              whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
-            >
-              <GlassCard className="max-w-4xl mx-auto">
-                <div className="flex flex-col gap-8 md:flex-row md:items-start">
-                  <FloatingElement duration={4} distance={15}>
-                    <img
-                      src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop"
-                      alt="CEO"
-                      className="h-32 w-32 shrink-0 rounded-2xl object-cover"
-                      loading="lazy"
-                    />
-                  </FloatingElement>
-                  <div>
-                    <p className="text-slate-300 leading-relaxed italic">
-                      &ldquo;At WMC, we believe trade is the bridge between
-                      nations and opportunities. Every shipment we handle
-                      carries the promise of quality, trust, and partnership. We
-                      invite you to grow with us.&rdquo;
-                    </p>
-                    <p className="mt-6 font-semibold text-white">
-                      Rajesh Fernando
-                    </p>
-                    <p className="text-sm text-cyan-400">CEO & Founder</p>
-                  </div>
-                </div>
-              </GlassCard>
-            </motion.div>
-          </FadeInUp>
         </div>
       </section>
 

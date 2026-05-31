@@ -47,7 +47,7 @@ function stripGalleryForStorage(items) {
       title,
       description: description || "",
       icon: icon || category || "box",
-      image: image || "",
+      image: image,
       category,
       type: type || "image",
       videoUrl,
@@ -112,8 +112,10 @@ export function DataProvider({ children }) {
           ? "box"
           : category === "warehouse"
             ? "warehouse"
-            : "event",
-      image: "",
+            : category === "promotion"
+              ? "star"
+              : "event",
+      image: "dataUrl",
       category,
       type: "image",
       storageId,

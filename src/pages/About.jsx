@@ -98,17 +98,21 @@ export default function About() {
                 marketplace.
               </p>
             </FadeInUp>
-            <motion.img
+            <motion.video
               initial={{ opacity: 0, x: 30, scale: 0.9 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
+              whileHover={{ scale: 1.55, rotateY: 5 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop"
-              alt="Office"
-              className="rounded-2xl shadow-2xl"
-              loading="lazy"
-            />
+              className="rounded-2xl shadow-2xl w-full aspect-square object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src="/vid/video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </motion.video>
           </div>
         </div>
       </section>

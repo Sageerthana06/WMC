@@ -174,59 +174,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Achievements Section */}
-      <section className="py-24 bg-slate-950/50">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <SectionTitle label="Achievements" title="Our Milestones" />
-          <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {achievements.map((a) => (
-              <StaggerItem key={a.title}>
-                <motion.div
-                  whileHover={{ y: -4, scale: 1.01 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <GlassCard className="text-center">
-                    <FloatingElement duration={3} distance={8}>
-                      <a.icon className="mx-auto h-10 w-10 text-cyan-400" />
-                    </FloatingElement>
-                    <h3 className="mt-4 font-display font-semibold text-white">
-                      {a.title}
-                    </h3>
-                    <p className="mt-2 text-sm text-slate-400">{a.desc}</p>
-                  </GlassCard>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Global Reach Section */}
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <SectionTitle
-            label="Global Reach"
-            title="International Business"
-            subtitle="Serving markets across continents with localized expertise"
-          />
-          <FadeInUp>
-            <motion.div whileHover={{ scale: 1.01 }}>
-              <GlassCard>
-                <p className="text-slate-400 leading-relaxed">
-                  WMC maintains active trade corridors to Europe, Middle East,
-                  North America, and Asia-Pacific. Our international team
-                  navigates complex regulations, currency considerations, and
-                  cultural business practices to ensure smooth cross-border
-                  transactions. We partner with major shipping lines, customs
-                  authorities, and trade chambers to deliver end-to-end
-                  solutions.
-                </p>
-              </GlassCard>
-            </motion.div>
-          </FadeInUp>
-        </div>
-      </section>
-
       {/* Our Team Section */}
       <section className="py-24 bg-slate-950/50">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">

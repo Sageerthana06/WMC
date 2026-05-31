@@ -86,9 +86,9 @@ export const initialServices = [
 export const initialGallery = [
   {
     id: "g1",
-    title: "Our Operational Warehouse",
-    category: "warehouse", // tabs-இல் உள்ள "warehouse" உடன் பொருந்தும்
-    image: "/images/gal-1.jpg", // public/images/க்குள் இருக்கும் சரியான பெயர்
+    title: "chairman",
+    category: "promotion",
+    image: "/photo/chairman.jpg",
     type: "image",
   },
   {

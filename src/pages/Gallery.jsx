@@ -15,7 +15,8 @@ import { useData } from "../context/DataContext";
 const tabs = [
   { id: "all", label: "All" },
   { id: "warehouse", label: "Warehouse" },
-  { id: "products", label: "Products" },
+
+  { id: "promotion", label: "Promotion" },
   { id: "events", label: "Events" },
   { id: "video", label: "Videos" },
 ];

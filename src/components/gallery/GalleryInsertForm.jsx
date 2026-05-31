@@ -31,10 +31,12 @@ export default function GalleryInsertForm({
   return (
     <section id="insert-image" className="mb-12">
       <GlassCard className="!p-6 md:!p-10">
-        <h3 className="font-display text-2xl font-bold text-white md:text-3xl">{title}</h3>
+        <h3 className="font-display text-2xl font-bold text-white md:text-3xl">
+          {title}
+        </h3>
         <p className="mt-2 text-slate-400">
-          Tap the button below — pick a photo from your phone or computer. No dashboard, no
-          links, no coding.
+          Tap the button below — pick a photo from your phone or computer. No
+          dashboard, no links, no coding.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-2">
@@ -42,6 +44,7 @@ export default function GalleryInsertForm({
             { id: "products", label: "Products" },
             { id: "warehouse", label: "Warehouse" },
             { id: "events", label: "Events" },
+            { id: "promotion", label: "Promotion" }, // 👈 இந்த புதிய லைன் இப்போது சேர்க்கப்பட்டுள்ளது!
           ].map((c) => (
             <button
               key={c.id}

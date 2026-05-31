@@ -1,20 +1,42 @@
 import { motion } from "framer-motion";
 import SectionTitle from "../components/ui/SectionTitle";
 import GlassCard from "../components/ui/GlassCard";
-import { FadeInUp, StaggerContainer, StaggerItem, FloatingElement } from "../components/animations/AnimatedComponents";
+import {
+  FadeInUp,
+  StaggerContainer,
+  StaggerItem,
+  FloatingElement,
+} from "../components/animations/AnimatedComponents";
 import { team, COMPANY } from "../data/initialData";
 import { FaGlobe, FaAward, FaHandshake, FaChartLine } from "react-icons/fa";
 
 const achievements = [
-  { icon: FaGlobe, title: "45+ Countries", desc: "Active trade partnerships worldwide" },
-  { icon: FaAward, title: "ISO Certified", desc: "Quality management standards" },
-  { icon: FaHandshake, title: "850+ Clients", desc: "Long-term business relationships" },
-  { icon: FaChartLine, title: "18 Years", desc: "Industry leadership since 2008" },
+  {
+    icon: FaGlobe,
+    title: "45+ Countries",
+    desc: "Active trade partnerships worldwide",
+  },
+  {
+    icon: FaAward,
+    title: "ISO Certified",
+    desc: "Quality management standards",
+  },
+  {
+    icon: FaHandshake,
+    title: "850+ Clients",
+    desc: "Long-term business relationships",
+  },
+  {
+    icon: FaChartLine,
+    title: "18 Years",
+    desc: "Industry leadership since 2008",
+  },
 ];
 
 export default function About() {
   return (
     <div className="pt-24">
+      {/* Hero Section */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <motion.div
@@ -52,6 +74,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* Our Story Section */}
       <section className="pb-24">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -62,14 +85,16 @@ export default function About() {
                 center={false}
               />
               <p className="text-slate-400 leading-relaxed">
-                Founded in 2008, World Entrepreneurs Export & Import (PVT) LTD began
-                as a small trading firm in Colombo. Today, we are a full-service
-                international trade company handling thousands of shipments annually
-                across agriculture, textiles, industrial goods, and more.
+                Founded in 2008, World Entrepreneurs Export & Import (PVT) LTD
+                began as a small trading firm in Colombo. Today, we are a
+                full-service international trade company handling thousands of
+                shipments annually across agriculture, textiles, industrial
+                goods, and more.
               </p>
               <p className="mt-4 text-slate-400 leading-relaxed">
-                Our growth has been driven by integrity, compliance, and a relentless
-                focus on client success in an ever-evolving global marketplace.
+                Our growth has been driven by integrity, compliance, and a
+                relentless focus on client success in an ever-evolving global
+                marketplace.
               </p>
             </FadeInUp>
             <motion.img
@@ -87,6 +112,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* Mission & Vision Section */}
       <section className="py-24 bg-slate-950/50">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <motion.div
@@ -105,27 +131,38 @@ export default function About() {
             }}
           >
             <motion.div
-              variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}
+              variants={{
+                hidden: { opacity: 0, x: -20 },
+                visible: { opacity: 1, x: 0 },
+              }}
               whileHover={{ y: -4, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
             >
               <GlassCard>
-                <h3 className="font-display text-2xl font-bold text-cyan-400">Mission</h3>
+                <h3 className="font-display text-2xl font-bold text-cyan-400">
+                  Mission
+                </h3>
                 <p className="mt-4 text-slate-400">
-                  To empower Sri Lankan businesses and international partners with
-                  seamless, compliant, and cost-effective export and import solutions
-                  that drive sustainable growth.
+                  To empower Sri Lankan businesses and international partners
+                  with seamless, compliant, and cost-effective export and import
+                  solutions that drive sustainable growth.
                 </p>
               </GlassCard>
             </motion.div>
             <motion.div
-              variants={{ hidden: { opacity: 0, x: 20 }, visible: { opacity: 1, x: 0 } }}
+              variants={{
+                hidden: { opacity: 0, x: 20 },
+                visible: { opacity: 1, x: 0 },
+              }}
               whileHover={{ y: -4, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
             >
               <GlassCard>
-                <h3 className="font-display text-2xl font-bold text-amber-400">Vision</h3>
+                <h3 className="font-display text-2xl font-bold text-amber-400">
+                  Vision
+                </h3>
                 <p className="mt-4 text-slate-400">
-                  To be South Asia&apos;s most trusted trade facilitation company,
-                  recognized for innovation, reliability, and excellence in global commerce.
+                  To be South Asia&apos;s most trusted trade facilitation
+                  company, recognized for innovation, reliability, and
+                  excellence in global commerce.
                 </p>
               </GlassCard>
             </motion.div>
@@ -133,11 +170,14 @@ export default function About() {
         </div>
       </section>
 
+      {/* Leadership Section */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <SectionTitle label="Leadership" title="Message from the CEO" />
           <FadeInUp>
-            <motion.div whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}>
+            <motion.div
+              whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
+            >
               <GlassCard className="max-w-4xl mx-auto">
                 <div className="flex flex-col gap-8 md:flex-row md:items-start">
                   <FloatingElement duration={4} distance={15}>
@@ -150,11 +190,14 @@ export default function About() {
                   </FloatingElement>
                   <div>
                     <p className="text-slate-300 leading-relaxed italic">
-                      &ldquo;At WMC, we believe trade is the bridge between nations and
-                      opportunities. Every shipment we handle carries the promise of
-                      quality, trust, and partnership. We invite you to grow with us.&rdquo;
+                      &ldquo;At WMC, we believe trade is the bridge between
+                      nations and opportunities. Every shipment we handle
+                      carries the promise of quality, trust, and partnership. We
+                      invite you to grow with us.&rdquo;
                     </p>
-                    <p className="mt-6 font-semibold text-white">Rajesh Fernando</p>
+                    <p className="mt-6 font-semibold text-white">
+                      Rajesh Fernando
+                    </p>
                     <p className="text-sm text-cyan-400">CEO & Founder</p>
                   </div>
                 </div>
@@ -164,18 +207,24 @@ export default function About() {
         </div>
       </section>
 
+      {/* Achievements Section */}
       <section className="py-24 bg-slate-950/50">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <SectionTitle label="Achievements" title="Our Milestones" />
           <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {achievements.map((a) => (
               <StaggerItem key={a.title}>
-                <motion.div whileHover={{ y: -4, scale: 1.01 }} transition={{ type: "spring", stiffness: 300 }}>
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
                   <GlassCard className="text-center">
                     <FloatingElement duration={3} distance={8}>
                       <a.icon className="mx-auto h-10 w-10 text-cyan-400" />
                     </FloatingElement>
-                    <h3 className="mt-4 font-display font-semibold text-white">{a.title}</h3>
+                    <h3 className="mt-4 font-display font-semibold text-white">
+                      {a.title}
+                    </h3>
                     <p className="mt-2 text-sm text-slate-400">{a.desc}</p>
                   </GlassCard>
                 </motion.div>
@@ -185,6 +234,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* Global Reach Section */}
       <section className="py-24">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <SectionTitle
@@ -196,12 +246,13 @@ export default function About() {
             <motion.div whileHover={{ scale: 1.01 }}>
               <GlassCard>
                 <p className="text-slate-400 leading-relaxed">
-                  WMC maintains active trade corridors to Europe, Middle East, North
-                  America, and Asia-Pacific. Our international team navigates complex
-                  regulations, currency considerations, and cultural business practices
-                  to ensure smooth cross-border transactions. We partner with major
-                  shipping lines, customs authorities, and trade chambers to deliver
-                  end-to-end solutions.
+                  WMC maintains active trade corridors to Europe, Middle East,
+                  North America, and Asia-Pacific. Our international team
+                  navigates complex regulations, currency considerations, and
+                  cultural business practices to ensure smooth cross-border
+                  transactions. We partner with major shipping lines, customs
+                  authorities, and trade chambers to deliver end-to-end
+                  solutions.
                 </p>
               </GlassCard>
             </motion.div>
@@ -209,6 +260,7 @@ export default function About() {
         </div>
       </section>
 
+      {/* Our Team Section */}
       <section className="py-24 bg-slate-950/50">
         <div className="mx-auto max-w-7xl px-4 lg:px-8">
           <SectionTitle label="Our Team" title="Meet the Experts" />
@@ -237,102 +289,6 @@ export default function About() {
               </StaggerItem>
             ))}
           </StaggerContainer>
-        </div>
-      </section>
-    </div>
-  );
-}
-            <div className="flex flex-col gap-8 md:flex-row md:items-start">
-              <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop"
-                alt="CEO"
-                className="h-32 w-32 shrink-0 rounded-2xl object-cover"
-                loading="lazy"
-              />
-              <div>
-                <p className="text-slate-300 leading-relaxed italic">
-                  &ldquo;At WMC, we believe trade is the bridge between nations and
-                  opportunities. Every shipment we handle carries the promise of
-                  quality, trust, and partnership. We invite you to grow with us.&rdquo;
-                </p>
-                <p className="mt-6 font-semibold text-white">Rajesh Fernando</p>
-                <p className="text-sm text-cyan-400">CEO & Founder</p>
-              </div>
-            </div>
-          </GlassCard>
-        </div>
-      </section>
-
-      <section className="py-24 bg-slate-950/50">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <SectionTitle label="Achievements" title="Our Milestones" />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {achievements.map((a, i) => (
-              <motion.div
-                key={a.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <GlassCard className="text-center">
-                  <a.icon className="mx-auto h-10 w-10 text-cyan-400" />
-                  <h3 className="mt-4 font-display font-semibold text-white">{a.title}</h3>
-                  <p className="mt-2 text-sm text-slate-400">{a.desc}</p>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <SectionTitle
-            label="Global Reach"
-            title="International Business"
-            subtitle="Serving markets across continents with localized expertise"
-          />
-          <GlassCard>
-            <p className="text-slate-400 leading-relaxed">
-              WMC maintains active trade corridors to Europe, Middle East, North
-              America, and Asia-Pacific. Our international team navigates complex
-              regulations, currency considerations, and cultural business practices
-              to ensure smooth cross-border transactions. We partner with major
-              shipping lines, customs authorities, and trade chambers to deliver
-              end-to-end solutions.
-            </p>
-          </GlassCard>
-        </div>
-      </section>
-
-      <section className="py-24 bg-slate-950/50">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <SectionTitle label="Our Team" title="Meet the Experts" />
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {team.map((member, i) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <GlassCard className="text-center !p-4">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="mx-auto h-40 w-40 rounded-2xl object-cover"
-                    loading="lazy"
-                  />
-                  <h3 className="mt-4 font-display font-semibold text-white">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm text-cyan-400">{member.role}</p>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
     </div>

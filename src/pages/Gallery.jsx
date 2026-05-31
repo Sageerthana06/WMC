@@ -1,44 +1,25 @@
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaTimes, FaPlay, FaTrash } from "react-icons/fa";
-import { toast } from "react-toastify";
+import { FaTimes, FaPlay } from "react-icons/fa";
 import SectionTitle from "../components/ui/SectionTitle";
-import GalleryInsertForm from "../components/gallery/GalleryInsertForm";
-import GalleryImage from "../components/gallery/GalleryImage";
-import {
-  FadeInUp,
-  StaggerContainer,
-  StaggerItem,
-} from "../components/animations/AnimatedComponents";
-import { useData } from "../context/DataContext";
+import { initialGallery } from "../data/initialData";
 
 const tabs = [
   { id: "all", label: "All" },
-  { id: "warehouse", label: "Warehouse" },
-
   { id: "promotion", label: "Promotion" },
   { id: "events", label: "Events" },
   { id: "video", label: "Videos" },
 ];
 
 export default function Gallery() {
-  const { gallery, removeGalleryPhoto } = useData();
   const [tab, setTab] = useState("all");
   const [lightbox, setLightbox] = useState(null);
 
   const filtered = useMemo(() => {
-    if (tab === "all") return gallery;
-    if (tab === "video") return gallery.filter((g) => g.type === "video");
-    return gallery.filter((g) => g.category === tab);
-  }, [gallery, tab]);
-
-  const handleDelete = async (e, id) => {
-    e.stopPropagation();
-    if (!window.confirm("Remove this photo?")) return;
-    await removeGalleryPhoto(id);
-    toast.info("Photo removed");
-    if (lightbox?.id === id) setLightbox(null);
-  };
+    if (tab === "all") return initialGallery;
+    if (tab === "video") return initialGallery.filter((g) => g.type === "video");
+    return initialGallery.filter((g) => g.category === tab);
+  }, [tab]);
 
   return (
     <motion.div
@@ -51,7 +32,7 @@ export default function Gallery() {
         <SectionTitle
           label="Gallery"
           title="Our World in Pictures"
-          subtitle="Tap Add Photo to upload — works on mobile and desktop"
+          subtitle="Explore our events, promotions and more"
         />
 
         <motion.div
@@ -89,13 +70,12 @@ export default function Gallery() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
-            No photos in this category yet. Use{" "}
-            <strong className="text-cyan-400">Add Photo</strong> above.
+            No photos in this category yet.
           </motion.p>
         ) : (
           <motion.div
             layout
-            className="columns-1 gap-4 sm:columns-2 lg:columns-3"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
             {filtered.map((item, i) => (
               <motion.div
@@ -109,7 +89,6 @@ export default function Gallery() {
                   type: "spring",
                   stiffness: 300,
                 }}
-                className="mb-4 break-inside-avoid"
               >
                 <motion.div
                   className="group relative w-full overflow-hidden rounded-2xl glass-dark"
@@ -124,21 +103,14 @@ export default function Gallery() {
                     <motion.div
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.5 }}
-                      className="overflow-hidden"
+                      className="aspect-square overflow-hidden"
                     >
-                      {item.type === "video" ? (
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full object-cover"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <GalleryImage
-                          item={item}
-                          className="w-full object-cover"
-                        />
-                      )}
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
                     </motion.div>
                     <motion.div
                       className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
@@ -174,18 +146,6 @@ export default function Gallery() {
                       </motion.div>
                     )}
                   </button>
-                  {item.uploaded && (
-                    <motion.button
-                      type="button"
-                      onClick={(e) => handleDelete(e, item.id)}
-                      className="absolute right-2 top-2 rounded-full bg-red-500/90 p-2 text-white shadow-lg sm:opacity-0 sm:transition sm:group-hover:opacity-100"
-                      aria-label="Delete photo"
-                      whileHover={{ scale: 1.15, rotate: 10 }}
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <FaTrash className="h-4 w-4" />
-                    </motion.button>
-                  )}
                 </motion.div>
               </motion.div>
             ))}
@@ -248,8 +208,9 @@ export default function Gallery() {
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200 }}
                 >
-                  <GalleryImage
-                    item={lightbox}
+                  <img
+                    src={lightbox.image}
+                    alt={lightbox.title}
                     className="max-h-[85vh] w-full rounded-2xl object-contain"
                   />
                 </motion.div>
@@ -262,11 +223,6 @@ export default function Gallery() {
                 <p className="mt-4 text-center text-lg font-semibold text-white">
                   {lightbox.title}
                 </p>
-                {lightbox.description && (
-                  <p className="mt-1 text-center text-slate-400">
-                    {lightbox.description}
-                  </p>
-                )}
               </motion.div>
             </motion.div>
           </motion.div>

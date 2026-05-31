@@ -47,7 +47,9 @@ function stripGalleryForStorage(items) {
       title,
       description: description || "",
       icon: icon || category || "box",
-      image: image,
+      // Don't save huge base64 dataURLs in localStorage — uploaded images
+      // are already persisted in IndexedDB and loaded via storageId.
+      image: uploaded && storageId ? "" : image,
       category,
       type: type || "image",
       videoUrl,
@@ -115,7 +117,7 @@ export function DataProvider({ children }) {
             : category === "promotion"
               ? "star"
               : "event",
-      image: "dataUrl",
+      image: dataUrl,
       category,
       type: "image",
       storageId,

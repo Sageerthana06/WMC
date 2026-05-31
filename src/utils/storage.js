@@ -12,6 +12,7 @@ export function saveToStorage(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
     return { ok: true };
   } catch (err) {
+    console.warn(`[storage] Failed to save "${key}":`, err.message);
     return { ok: false, error: err };
   }
 }

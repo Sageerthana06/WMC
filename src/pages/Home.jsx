@@ -82,33 +82,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Partners */}
-      <section className="py-16 border-y border-white/10">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <motion.p
-            className="mb-8 text-center text-sm font-medium uppercase tracking-widest text-slate-500"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Trusted Partners
-          </motion.p>
-          <StaggerContainer className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            {partners.map((name) => (
-              <StaggerItem key={name}>
-                <motion.span
-                  className="font-display text-lg font-semibold text-slate-600 transition hover:text-slate-400"
-                  whileHover={{ scale: 1.1, color: "#94a3b8" }}
-                >
-                  {name}
-                </motion.span>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
       {/* Contact CTA */}
       <section className="py-24">
         <div className="mx-auto max-w-4xl px-4 lg:px-8">

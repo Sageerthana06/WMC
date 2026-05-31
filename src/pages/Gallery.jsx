@@ -52,11 +52,10 @@ export default function Gallery() {
               transition={{ delay: i * 0.05 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`rounded-xl px-5 py-2.5 text-sm font-medium transition ${
-                tab === t.id
+              className={`rounded-xl px-5 py-2.5 text-sm font-medium transition ${tab === t.id
                   ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/30"
                   : "glass text-slate-400 hover:text-white"
-              }`}
+                }`}
             >
               {t.label}
             </motion.button>

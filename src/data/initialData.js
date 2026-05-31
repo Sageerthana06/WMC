@@ -108,7 +108,7 @@ export const initialGallery = [
     id: "g4",
     title: "Team Photo 1",
     category: "promotion",
-    image: "/photo/2.jpg",
+    image: "/photo/4.jpg",
     type: "image",
   },
   {
@@ -122,7 +122,7 @@ export const initialGallery = [
     id: "g6",
     title: "Team Photo 3",
     category: "promotion",
-    image: "/photo/4.jpg",
+    image: "/photo/2.jpg",
     type: "image",
   },
   {

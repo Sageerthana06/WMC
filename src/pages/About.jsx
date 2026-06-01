@@ -177,38 +177,28 @@ export default function About() {
           </motion.div>
         </div>
       </section>
-
-      {/* Our Team Section */}
-      <section className="py-24 bg-slate-950/50">
-        <div className="mx-auto max-w-7xl px-4 lg:px-8">
-          <SectionTitle label="Our Team" title="Meet the Experts" />
-          <StaggerContainer className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {team.map((member) => (
-              <StaggerItem key={member.name}>
-                <motion.div
-                  whileHover={{ y: -8, scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <GlassCard className="text-center !p-4">
-                    <motion.img
-                      src={member.image}
-                      alt={member.name}
-                      className="mx-auto h-40 w-40 rounded-2xl object-cover"
-                      loading="lazy"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.4 }}
-                    />
-                    <h3 className="mt-4 font-display font-semibold text-white">
-                      {member.name}
-                    </h3>
-                    <p className="text-sm text-cyan-400">{member.role}</p>
-                  </GlassCard>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
     </div>
   );
 }
+{
+  /* About.js கோப்பில் மாற்ற வேண்டிய பகுதி */
+}
+<section className="py-24 bg-slate-950/50">
+  <div className="mx-auto max-w-7xl px-4 lg:px-8">
+    {/* SectionTitle-க்கு பதிலாக படத்தை நேரடியாகப் பயன்படுத்துதல் */}
+    <div className="text-center mb-12">
+      <span className="text-sm font-semibold uppercase tracking-widest text-cyan-400">
+        Our Team
+      </span>
+      <img
+        src="/path/to/your/image_5203fb.png"
+        alt="Meet the Experts"
+        className="mx-auto mt-4"
+      />
+    </div>
+
+    <StaggerContainer className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {/* உங்கள் டீம் மெம்பர்கள் கோட் */}
+    </StaggerContainer>
+  </div>
+</section>;

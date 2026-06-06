@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaTimes, FaPlay } from "react-icons/fa";
 import SectionTitle from "../components/ui/SectionTitle";
-import { initialGallery } from "../data/initialData";
+import { useData } from "../context/DataContext";
 
 const tabs = [
   { id: "all", label: "All" },
@@ -14,15 +14,16 @@ const tabs = [
 ];
 
 export default function Gallery() {
+  const { gallery } = useData();
   const [tab, setTab] = useState("all");
   const [lightbox, setLightbox] = useState(null);
 
   const filtered = useMemo(() => {
-    if (tab === "all") return initialGallery;
+    if (tab === "all") return gallery;
     if (tab === "video")
-      return initialGallery.filter((g) => g.type === "video");
-    return initialGallery.filter((g) => g.category === tab);
-  }, [tab]);
+      return gallery.filter((g) => g.type === "video");
+    return gallery.filter((g) => g.category === tab);
+  }, [tab, gallery]);
 
   return (
     <motion.div

@@ -8,10 +8,13 @@ import {
   FaPhone,
   FaMapMarkerAlt,
 } from "react-icons/fa";
-import { COMPANY } from "../../data/initialData";
 import { footerNavLinks } from "../../data/navLinks";
+import { useData } from "../../context/DataContext";
 
 export default function Footer() {
+  const { siteSettings } = useData();
+  const company = siteSettings?.company || {};
+
   return (
     <footer className="border-t border-white/10 bg-slate-950/80">
       <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
@@ -22,11 +25,11 @@ export default function Footer() {
                 W
               </div>
               <span className="font-display font-bold text-white">
-                {COMPANY.shortName}
+                {company.shortName || "WEC"}
               </span>
             </div>
-            <p className="text-sm text-slate-400">{COMPANY.name}</p>
-            <p className="mt-2 text-sm text-slate-500">{COMPANY.tagline}</p>
+            <p className="text-sm text-slate-400">{company.name || ""}</p>
+            <p className="mt-2 text-sm text-slate-500">{company.tagline || ""}</p>
           </div>
 
           <div>
@@ -50,15 +53,15 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex items-start gap-2">
                 <FaMapMarkerAlt className="mt-0.5 shrink-0 text-cyan-400" />
-                {COMPANY.address}
+                {company.address || ""}
               </li>
               <li className="flex items-center gap-2">
                 <FaPhone className="shrink-0 text-cyan-400" />
-                {COMPANY.phone}
+                {company.phone || ""}
               </li>
               <li className="flex items-center gap-2">
                 <FaEnvelope className="shrink-0 text-cyan-400" />
-                {COMPANY.email}
+                {company.email || ""}
               </li>
             </ul>
           </div>
@@ -67,10 +70,10 @@ export default function Footer() {
             <h4 className="mb-4 font-semibold text-white">Follow Us</h4>
             <div className="flex gap-3">
               {[
-                { icon: FaFacebookF, href: COMPANY.social.facebook },
-                { icon: FaLinkedinIn, href: COMPANY.social.linkedin },
-                { icon: FaInstagram, href: COMPANY.social.instagram },
-                { icon: FaTwitter, href: COMPANY.social.twitter },
+                { icon: FaFacebookF, href: company.social?.facebook },
+                { icon: FaLinkedinIn, href: company.social?.linkedin },
+                { icon: FaInstagram, href: company.social?.instagram },
+                { icon: FaTwitter, href: company.social?.twitter },
               ].map(({ icon: Icon, href }, i) => (
                 <a
                   key={i}
@@ -86,8 +89,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-slate-500">
-          <p>© {new Date().getFullYear()} {COMPANY.name}. All rights reserved.</p>
+        <div className="mt-12 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+          <p>© {new Date().getFullYear()} {company.name || "WEC"}. All rights reserved.</p>
+          <Link to="/admin/login" className="mt-4 md:mt-0 hover:text-cyan-400 transition">
+            Admin Portal
+          </Link>
         </div>
       </div>
     </footer>

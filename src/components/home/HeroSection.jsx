@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowRight, FaPlay } from "react-icons/fa";
-import { COMPANY } from "../../data/initialData";
+import { useData } from "../../context/DataContext";
 
 const slides = [
   "https://images.unsplash.com/photo-1494412574647-9c33ee5b0e9e?w=1920&h=1080&fit=crop",
@@ -11,6 +11,7 @@ const slides = [
 ];
 
 export default function HeroSection() {
+  const { siteSettings } = useData();
   const [slide, setSlide] = useState(0);
 
   useEffect(() => {
@@ -50,14 +51,13 @@ export default function HeroSection() {
           className="max-w-3xl"
         >
           <span className="mb-4 inline-block rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-sm font-medium text-cyan-400">
-            {COMPANY.name}
+            {siteSettings?.company?.name || "Connecting Business Opportunities"}
           </span>
           <h1 className="font-display text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
-            <span className="gradient-text">{COMPANY.tagline}</span>
+            <span className="gradient-text">{siteSettings?.home?.heroTagline || "World Entrepreneurs Export & Import (PVT) LTD"}</span>
           </h1>
           <p className="mt-6 text-lg text-slate-300 md:text-xl">
-            Connecting Sri Lanka to the world through premium export, import,
-            logistics, and trade consulting services.
+            {siteSettings?.home?.heroSubtitle || "Connecting Sri Lanka to the world through premium export, import, logistics, and trade consulting services."}
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { initialServices, initialGallery } from "../data/initialData";
+import { initialServices, initialGallery, INITIAL_SITE_SETTINGS } from "../data/initialData";
 import { getImage } from "../data/catalogTypes";
 import { generateId, loadFromStorage, saveToStorage } from "../utils/storage";
 import { saveGalleryImage, deleteGalleryImage } from "../utils/galleryImageDB";
@@ -10,6 +10,7 @@ const KEYS = {
   services: "wEc-services",
   gallery: "wEc-gallery",
   messages: "wEc-messages",
+  siteSettings: "wEc-siteSettings",
 };
 
 function normalizeProduct(p) {
@@ -47,9 +48,7 @@ function stripGalleryForStorage(items) {
       title,
       description: description || "",
       icon: icon || category || "box",
-      // Don't save huge base64 dataURLs in localStorage — uploaded images
-      // are already persisted in IndexedDB and loaded via storageId.
-      image: uploaded && storageId ? "" : image,
+      image,
       category,
       type: type || "image",
       videoUrl,
@@ -68,6 +67,9 @@ export function DataProvider({ children }) {
   const [messages, setMessages] = useState(() =>
     loadFromStorage(KEYS.messages, []),
   );
+  const [siteSettings, setSiteSettings] = useState(() =>
+    loadFromStorage(KEYS.siteSettings, INITIAL_SITE_SETTINGS),
+  );
 
   useEffect(() => {
     saveToStorage(KEYS.services, services);
@@ -80,6 +82,10 @@ export function DataProvider({ children }) {
   useEffect(() => {
     saveToStorage(KEYS.messages, messages);
   }, [messages]);
+
+  useEffect(() => {
+    saveToStorage(KEYS.siteSettings, siteSettings);
+  }, [siteSettings]);
 
   const addMessage = (msg) => {
     const entry = {
@@ -152,6 +158,10 @@ export function DataProvider({ children }) {
   const serviceCrud = crud(setServices);
   const galleryCrud = crud(setGallery);
 
+  const updateSiteSettings = (newSettings) => {
+    setSiteSettings(newSettings);
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -167,6 +177,8 @@ export function DataProvider({ children }) {
         galleryCrud,
         setServices,
         setGallery,
+        siteSettings,
+        updateSiteSettings,
       }}
     >
       {children}

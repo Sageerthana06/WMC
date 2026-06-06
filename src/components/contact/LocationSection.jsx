@@ -9,17 +9,15 @@ import {
   FaExpand,
   FaWhatsapp,
 } from "react-icons/fa";
-import AnimatedModal from "../ui/AnimatedModal";
-import { COMPANY } from "../../data/initialData";
-
-const MAP_EMBED =
-  "https://www.google.com/maps/d/u/0/embed?mid=1IXoo2HTLpkdYVrEc2vZ6wkq-GmJ7ZZ0&ehbc=2E312F";
+import { useData } from "../../context/DataContext";
 
 export default function LocationSection() {
+  const { siteSettings } = useData();
+  const company = siteSettings?.company || {};
   const [modalOpen, setModalOpen] = useState(false);
-  const phone = COMPANY.whatsapp.replace(/\D/g, "");
+  const phone = company.whatsapp ? company.whatsapp.replace(/\D/g, "") : "";
   const waMessage = encodeURIComponent(
-    `Hello ${COMPANY.shortName}, I would like to inquire about your services.`,
+    `Hello ${company.shortName || "WEC"}, I would like to inquire about your services.`,
   );
 
   return (
@@ -44,20 +42,20 @@ export default function LocationSection() {
               {[
                 {
                   icon: FaMapMarkerAlt,
-                  text: COMPANY.address,
+                  text: company.address || "",
                   label: "Address",
                 },
                 {
                   icon: FaPhone,
-                  text: COMPANY.phone,
+                  text: company.phone || "",
                   label: "Phone",
-                  href: `tel:${COMPANY.phone}`,
+                  href: `tel:${company.phone || ""}`,
                 },
                 {
                   icon: FaEnvelope,
-                  text: COMPANY.email,
+                  text: company.email || "",
                   label: "Email",
-                  href: `mailto:${COMPANY.email}`,
+                  href: `mailto:${company.email || ""}`,
                 },
                 {
                   icon: FaClock,
@@ -126,7 +124,7 @@ export default function LocationSection() {
               >
                 <iframe
                   title="WEC Office Location"
-                  src={MAP_EMBED}
+                  src={siteSettings?.map?.embedUrl}
                   className="absolute -top-[60px] left-0 h-[calc(100%+60px)] w-full border-0"
                   loading="lazy"
                 />
@@ -145,7 +143,7 @@ export default function LocationSection() {
         <div className="h-[480px] w-full overflow-hidden rounded-2xl border-2 border-sky-200 relative">
           <iframe
             title="WEC Full Map"
-            src={MAP_EMBED}
+            src={siteSettings?.map?.embedUrl}
             className="absolute -top-[60px] left-0 h-[calc(100%+60px)] w-full border-0"
           />
         </div>

@@ -16,6 +16,9 @@ const Services = lazy(() => import("./pages/Services"));
 const Gallery = lazy(() => import("./pages/Gallery"));
 const Contact = lazy(() => import("./pages/Contact"));
 
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+
 function PageLoader() {
   return (
     <div className="flex min-h-[60vh] items-center justify-center">
@@ -39,6 +42,8 @@ export default function App() {
                   <Route path="gallery" element={<Gallery />} />
                   <Route path="contact" element={<Contact />} />
                 </Route>
+                <Route path="admin/login" element={<AdminLogin />} />
+                <Route path="admin/dashboard" element={<AdminDashboard />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </AnimatePresence>

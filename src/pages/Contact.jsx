@@ -22,10 +22,11 @@ import {
   FloatingElement,
 } from "../components/animations/AnimatedComponents";
 import { useData } from "../context/DataContext";
-import { COMPANY } from "../data/initialData";
+// No COMPANY import
 
 export default function Contact() {
-  const { addMessage } = useData();
+  const { addMessage, siteSettings } = useData();
+  const company = siteSettings?.company || {};
   const { hash } = useLocation();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -89,9 +90,9 @@ export default function Contact() {
         : "border-white/10 focus:border-cyan-500/50"
     }`;
 
-  const phone = COMPANY.whatsapp.replace(/\D/g, "");
+  const phone = company.whatsapp ? company.whatsapp.replace(/\D/g, "") : "";
   const waMessage = encodeURIComponent(
-    `Hello ${COMPANY.shortName}, I would like to inquire about your services.`,
+    `Hello ${company.shortName || "WEC"}, I would like to inquire about your services.`,
   );
 
   return (
@@ -262,7 +263,7 @@ export default function Contact() {
                         <FloatingElement duration={3} distance={5}>
                           <FaMapMarkerAlt className="mt-1 shrink-0 text-cyan-400" />
                         </FloatingElement>
-                        {COMPANY.address}
+                        {company.address || ""}
                       </motion.li>
 
                       <motion.li
@@ -274,10 +275,10 @@ export default function Contact() {
                           <FaPhone className="shrink-0 text-cyan-400" />
                         </FloatingElement>
                         <a
-                          href={`tel:${COMPANY.phone}`}
+                          href={`tel:${company.phone || ""}`}
                           className="hover:text-white"
                         >
-                          {COMPANY.phone}
+                          {company.phone || ""}
                         </a>
                       </motion.li>
 
@@ -290,10 +291,10 @@ export default function Contact() {
                           <FaEnvelope className="shrink-0 text-cyan-400" />
                         </FloatingElement>
                         <a
-                          href={`mailto:${COMPANY.email}`}
+                          href={`mailto:${company.email || ""}`}
                           className="hover:text-white"
                         >
-                          {COMPANY.email}
+                          {company.email || ""}
                         </a>
                       </motion.li>
                     </ul>
@@ -324,10 +325,10 @@ export default function Contact() {
                     <h3 className="mb-4 font-semibold text-white">Follow Us</h3>
                     <div className="flex gap-3">
                       {[
-                        { icon: FaFacebookF, href: COMPANY.social.facebook },
-                        { icon: FaLinkedinIn, href: COMPANY.social.linkedin },
-                        { icon: FaInstagram, href: COMPANY.social.instagram },
-                        { icon: FaTwitter, href: COMPANY.social.twitter },
+                        { icon: FaFacebookF, href: company.social?.facebook },
+                        { icon: FaLinkedinIn, href: company.social?.linkedin },
+                        { icon: FaInstagram, href: company.social?.instagram },
+                        { icon: FaTwitter, href: company.social?.twitter },
                       ].map(({ icon: Icon, href }, i) => (
                         <motion.a
                           key={i}

@@ -7,8 +7,9 @@ import {
   StaggerItem,
   FloatingElement,
 } from "../components/animations/AnimatedComponents";
-import { team, COMPANY } from "../data/initialData";
+import { team } from "../data/initialData";
 import { FaGlobe, FaAward, FaHandshake, FaChartLine } from "react-icons/fa";
+import { useData } from "../context/DataContext";
 
 const achievements = [
   {
@@ -34,6 +35,8 @@ const achievements = [
 ];
 
 export default function About() {
+  const { siteSettings } = useData();
+
   return (
     <div className="pt-24">
       {/* Hero Section */}
@@ -59,7 +62,7 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {COMPANY.name}
+              {siteSettings?.company?.name || "World Entrepreneurs Export & Import (PVT) LTD"}
             </motion.h1>
             <motion.p
               className="mx-auto mt-4 max-w-2xl text-slate-400"
@@ -84,19 +87,10 @@ export default function About() {
                 title="Company History"
                 center={false}
               />
-              <p className="text-slate-400 leading-relaxed">
-                World Entrepreneurs Company was founded to empower individuals
-                through entrepreneurship, leadership development, and direct
-                marketing opportunities. Since its establishment, the company
-                has focused on professional growth, innovation, and creating
-                pathways to success for its team members and partners.
-                "Empowering People, Building Leaders."
+              <p className="text-slate-400 leading-relaxed whitespace-pre-wrap">
+                {siteSettings?.about?.history || "Company history..."}
               </p>
-              <p className="mt-4 text-slate-400 leading-relaxed">
-                Our growth has been driven by integrity, compliance, and a
-                relentless focus on client success in an ever-evolving global
-                marketplace.
-              </p>
+              <p className="mt-4 text-slate-400 leading-relaxed"></p>
             </FadeInUp>
             <motion.video
               initial={{ opacity: 0, x: 30, scale: 0.9 }}
@@ -146,13 +140,8 @@ export default function About() {
                 <h3 className="font-display text-2xl font-bold text-cyan-400">
                   Mission
                 </h3>
-                <p className="mt-4 text-slate-400">
-                  Welcome to our company. Our mission is to create
-                  opportunities, develop leadership, and empower individuals to
-                  achieve their personal and professional goals. Through
-                  innovation, teamwork, and dedication, we strive to provide
-                  exceptional value to our customers and partners. Thank you for
-                  being part of our journey towards growth and success
+                <p className="mt-4 text-slate-400 whitespace-pre-wrap">
+                  {siteSettings?.about?.mission || "Mission..."}
                 </p>
               </GlassCard>
             </motion.div>
@@ -167,10 +156,8 @@ export default function About() {
                 <h3 className="font-display text-2xl font-bold text-amber-400">
                   Vision
                 </h3>
-                <p className="mt-4 text-slate-400">
-                  To become a leading marketing company that empowers Sri Lankan
-                  youth, enabling them to establish branch companies across the
-                  nation and create sustainable employment opportunities.
+                <p className="mt-4 text-slate-400 whitespace-pre-wrap">
+                  {siteSettings?.about?.vision || "Vision..."}
                 </p>
               </GlassCard>
             </motion.div>

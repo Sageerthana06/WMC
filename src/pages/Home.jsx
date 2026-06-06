@@ -12,10 +12,11 @@ import {
   StaggerItem,
 } from "../components/animations/AnimatedComponents";
 import { useData } from "../context/DataContext";
-import { partners, stats, COMPANY } from "../data/initialData";
+import { partners, stats } from "../data/initialData";
 
 export default function Home() {
-  const { services } = useData();
+  const { services, siteSettings } = useData();
+  const company = siteSettings?.company || {};
   const featuredServices = services.filter((s) => s.featured).slice(0, 4);
 
   return (
@@ -110,7 +111,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.1 }}
                 >
-                  Partner with {COMPANY.shortName} for seamless export and
+                  Partner with {company.shortName || "WEC"} for seamless export and
                   import solutions. Get a free consultation today.
                 </motion.p>
                 <motion.div

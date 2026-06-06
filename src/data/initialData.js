@@ -21,6 +21,22 @@ export const COMPANY = {
   },
 };
 
+export const INITIAL_SITE_SETTINGS = {
+  company: COMPANY,
+  home: {
+    heroTagline: "World Entrepreneurs Export & Import (PVT) LTD",
+    heroSubtitle: "Connecting Sri Lanka to the world through premium export, import, logistics, and trade consulting services.",
+  },
+  about: {
+    history: "World Entrepreneurs Company was founded to empower individuals through entrepreneurship, leadership development, and direct marketing opportunities. Since its establishment, the company has focused on professional growth, innovation, and creating pathways to success for its team members and partners. \"Empowering People, Building Leaders.\"",
+    mission: "Welcome to our company. Our mission is to create opportunities, develop leadership, and empower individuals to achieve their personal and professional goals. Through innovation, teamwork, and dedication, we strive to provide exceptional value to our customers and partners. Thank you for being part of our journey towards growth and success",
+    vision: "To become a leading marketing company that empowers Sri Lankan youth, enabling them to establish branch companies across the nation and create sustainable employment opportunities.",
+  },
+  map: {
+    embedUrl: "https://www.google.com/maps/d/u/0/embed?mid=1IXoo2HTLpkdYVrEc2vZ6wkq-GmJ7ZZ0&ehbc=2E312F"
+  }
+};
+
 /** Services — id, title, description, icon, image, featured */
 export const initialServices = [
   {
